@@ -125,6 +125,7 @@ dmypy.json
 .pyre/
 
 venv/
+venv/*
 __pycache__/
 geckodriver.exe
 */.exe
