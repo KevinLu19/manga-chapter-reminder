@@ -6,7 +6,7 @@ import os
 class Database:
     def __init__(self):
         print("-------------------------")
-        self.conn = mysql.connector.connect(host="localhost", user=f"{os.environ.get('DATABASE_USERNAME')}", password=f"{os.environ.get('DATABASE_PASSWORD')}", database="manga_chapters")
+        self.conn = mysql.connector.connect(host="localhost", user="root", password="tifalockhart", database="manga_chapter")
         print("Logged into the database")
         print("-------------------------")
 
@@ -25,17 +25,32 @@ class Database:
     # ----------------------------------------
     # Public Methods
     # ----------------------------------------
+    def fetch_all_manga_title(self):
+        SQL_COMMAND = f"SELECT name FROM manga_name"
+        self.cursor.execute(SQL_COMMAND)
 
-    def fetch_manga_title(self):
-        pass
+        return self.cursor.fetchall()
 
-
+    def add_into_database(self, manga_title):
+        self.__add_entry(manga_title)           # Protection of private member of private member function of database.
 
     # ----------------------------------------
     # Private Methods
     # ----------------------------------------
-    def __add_manga_title(self, manga_title):
-        pass
+    def __add_entry(self, manga_title):
+        SQL_COMMAND = f"INSERT IGNORE INTO manga_name(name) VALUES('{manga_title}');" 
+
+        try:
+            self.cursor.execute(SQL_COMMAND)
+            print("-----------------")
+            print(f"Added {manga_title} into the table.")
+            print("-----------------")
+
+            self.conn.commit()
+        
+        except mysql.connector.Error as err:
+            print(err.msg)
+            self.conn.rollback()
 
     def __drop_table(self):
         pass
@@ -50,3 +65,6 @@ class Database:
             print("Closing connection to the databse.")
             print("=====================")
             self.conn.close()
+
+if __name__ == "__main__":
+    database = Database()
