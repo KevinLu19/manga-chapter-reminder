@@ -6,7 +6,7 @@ import os
 class Database:
     def __init__(self):
         print("-------------------------")
-        self.conn = mysql.connector.connect(host="localhost", user="root", password="tifalockhart", database="manga_chapter")
+        self.conn = mysql.connector.connect(host="localhost", user="root", password=f"{os.environ.get(DATABASE_PASSWORD}", database="manga_chapter")
         print("Logged into the database")
         print("-------------------------")
 
