@@ -1,12 +1,12 @@
 from mysql.connector import errorcode
+from decouple import config
 
 import mysql.connector
-import os
 
 class Database:
     def __init__(self):
         print("-------------------------")
-        self.conn = mysql.connector.connect(host="localhost", user="root", password="tifalockhart", database="manga_chapter")
+        self.conn = mysql.connector.connect(host="localhost", user=config("DATABASE_USERNAME"), password=config("DATABASE_PASSWORD"), database="manga_chapter")
         print("Logged into the database")
         print("-------------------------")
 
@@ -38,18 +38,18 @@ class Database:
     # Private Methods
     # ----------------------------------------
     def __add_entry(self, manga_title):
-        SQL_COMMAND = f"INSERT IGNORE INTO manga_name(name) VALUES('{manga_title}');" 
+        SQL_COMMAND = f"INSERT IGNORE INTO manga_name(name) VALUES(%s);" 
+        VALUE = manga_title
 
         try:
-            self.cursor.execute(SQL_COMMAND)
-            print("-----------------")
-            print(f"Added {manga_title} into the table.")
-            print("-----------------")
-
+            self.cursor.execute(SQL_COMMAND, (VALUE,))
             self.conn.commit()
+            print("-----------------")
+            print(f"Added {VALUE} into the table.")
+            print("-----------------")
         
         except mysql.connector.Error as err:
-            print(err.msg)
+            print(f"mysql exception: {err}")
             self.conn.rollback()
 
     def __drop_table(self):
@@ -67,4 +67,6 @@ class Database:
             self.conn.close()
 
 if __name__ == "__main__":
-    database = Database()
+    print(f"Database Pass: {config('DATABASE_PASSWORD')}")
+    print(f"Database User: {config('DATABASE_USERNAME')}")
+    # database = Database()
