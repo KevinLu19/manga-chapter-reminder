@@ -24,8 +24,6 @@ class MangaTitle:
     # Private Methods
     # ----------------------------------------
 
-
-
 # Temporary stuff
 def main():
     while True:
