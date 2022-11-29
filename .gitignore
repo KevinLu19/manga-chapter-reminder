@@ -140,3 +140,5 @@ database.db
 notes.txt
 
 env.bat
+
+src/mangadex_api/api.py

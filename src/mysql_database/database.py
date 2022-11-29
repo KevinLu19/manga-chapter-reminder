@@ -66,6 +66,10 @@ class Database:
             print("=====================")
             self.conn.close()
 
+class LatestMangaChapter:
+    def __init__(self):
+        pass
+
 if __name__ == "__main__":
     print(f"Database Pass: {config('DATABASE_PASSWORD')}")
     print(f"Database User: {config('DATABASE_USERNAME')}")
