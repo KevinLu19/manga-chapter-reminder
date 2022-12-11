@@ -18,5 +18,5 @@ if __name__ == "__main__":
 
     # print(list_manga_id)
 
-    manga_chapter = manga_chapter.MangaChapter(list_manga_id)
+    manga_chapter = manga_chapter.MangaChapter()
     manga_chapter.get_manga_chapter(list_manga_id)

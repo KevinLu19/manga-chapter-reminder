@@ -68,9 +68,31 @@ class Database:
 
 class LatestMangaChapter:
     def __init__(self):
+        print("-------------------")
+        self.conn = mysql.connector.connect(host="localhost", user=config("DATABASE_USERNAME"), password=config("DATABASE_PASSWORD"), database="manga_chapter")
+        print("Logged into Latest Chapter Table.")
+        print("-------------------")
+
+        self.cursor = self.conn.cursor()
+
+        try:
+            SQL_COMMAND = "CREATE TABLE IF NOT EXISTS latest_chapter (name VARCHAR(255), chapter_number INT)"
+            self.cursor.execute(SQL_COMMAND)
+
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                print("Table already created.")
+            else:
+                print(err.msg)
+
+    # ----------------------------------------
+    # Public Methods
+    # ----------------------------------------
+    def __add_entry(self):
         pass
 
 if __name__ == "__main__":
     print(f"Database Pass: {config('DATABASE_PASSWORD')}")
     print(f"Database User: {config('DATABASE_USERNAME')}")
     # database = Database()
+    latest_chpt = LatestMangaChapter()
