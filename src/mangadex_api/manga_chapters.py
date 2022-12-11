@@ -23,13 +23,6 @@ class MangaChapter:
     # ----------------------------------------
     # Public Methods
     # ----------------------------------------
-    
-    def get_manga_ids(self, manga_ids: list):
-        for manga_ids in manga_ids:
-            for manga_id in manga_ids:
-                self.__manga_id = manga_id
-        
-        print (self.__manga_id)
 
     def get_manga_chapter(self, manga_ids: list):
         temporary_manga_id = "b4c93297-b32f-4f90-b619-55456a38b0aa"     # Later on, grab this from database.
