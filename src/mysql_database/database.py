@@ -88,8 +88,19 @@ class LatestMangaChapter:
     # ----------------------------------------
     # Public Methods
     # ----------------------------------------
-    def __add_entry(self):
+    def verify_name_in_database(self, manga_name_str):
+        SQL_COMMAND = f"SELECT * FROM lastest_chapter WHERE NAME={manga_name_str}"
+
+
+    def update_latest_manga_chapter(self):
         pass
+
+    # ----------------------------------------
+    # Private Methods
+    # ----------------------------------------
+    def __add_entry(self, manga_name: str, latest_manga_chapter: int):
+        SQL_COMMAND = f"INSERT INGNORE INTO latest_chapter(name, chapter_number) VALUES(%s, %i)"
+
 
 if __name__ == "__main__":
     print(f"Database Pass: {config('DATABASE_PASSWORD')}")

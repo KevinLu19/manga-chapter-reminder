@@ -31,7 +31,8 @@ class MangaChapter:
         chapter_list = []
         chapter_readable_time = []
 
-        # Iterates through list of manga ids within a lists. 
+        # Iterates through list of manga ids within a lists.
+        # These two for loops, grabs the data using request module.
         for manga_ids_lists in manga_ids:
             for manga_id in manga_ids_lists:
                 
@@ -39,14 +40,24 @@ class MangaChapter:
 
                 req = requests.get(f"{self.BASE_URL}/manga/{self.__manga_id}/feed", params={"translatedLanguage[]": langauge},)
                 manga_chapter_attributes = [chapter["attributes"] for chapter in req.json()["data"]]
+        
+        # This block of code actually fetches the chapter from the request module.
+        for chapter in manga_chapter_attributes:
+            chapter_list.append(float(chapter["chapter"]))
+            chapter_readable_time.append(chapter["readableAt"])
+                    
 
-                for chapter in manga_chapter_attributes:
-                    chapter_list.append(float(chapter["chapter"]))
-                    chapter_readable_time.append(chapter["readableAt"])
+        readable_manga_name_str = self.get_manga_readable_name(self.__manga_id)
 
-                readable_manga_name_str = self.get_manga_readable_name(self.__manga_id)
-                self.get_biggest_chapter(chapter_list, readable_manga_name_str)
-                self.get_biggest_readable(chapter_readable_time)
+        # print(chapter_list)
+        # print(chapter_readable_time[-1])
+        
+        self.get_biggest_chapter(chapter_list, readable_manga_name_str)
+        self.get_biggest_readable(chapter_readable_time)
+
+    # Maps each element of chapter list to it's number counter part.
+    def map_manga_chapter_lists(manga_chapter_list, manga_chapter_number_list):
+        return list(map(lambda x, y: x + "" +y, manga_chapter_list, manga_chapter_number_list))
 
     # Helper function which stores the current largest readable time to compare with upcoming chapters/ readable times.
     # Might need to change the type of readable_time from <str> to a <time> format as this could potentially cause issues in the future when comparing.
@@ -64,8 +75,6 @@ class MangaChapter:
 
         self.latest_chapter_int = sorted_chapter[-1]
 
-        # readable_manga_name_str = self.get_manga_chapter(self.__manga_id)
-        
         print ("#############")
         print("Manga ID: ", self.__manga_id)
         print("Manga Name: ", english_manga_name_str)
