@@ -20,7 +20,8 @@ if __name__ == "__main__":
 
     # Fetches the manga chapter using the ID from manga ID class.
     manga_chapter = manga_chapter.MangaChapter()
-    manga_chapter.get_manga_chapter(list_manga_id)
+    manga_chapter.manga_id_cleanup(list_manga_id)
+    manga_chapter.get_manga_chapter()
 
     # manga_database = db.Database()
     # latest_chapter_database = db_chapter.LatestMangaChapter()
