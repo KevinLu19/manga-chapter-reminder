@@ -45,6 +45,7 @@ class MangaChapter:
 
         return chapter_list, chapter_readable_time
 
+    # This should be the function that starts the class.
     def get_manga_chapter(self):
         temporary_manga_id = "b4c93297-b32f-4f90-b619-55456a38b0aa"     # Later on, grab this from database.
 
