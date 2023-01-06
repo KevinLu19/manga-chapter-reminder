@@ -13,15 +13,6 @@ class MangaChapter:
     # Public Methods
     # ----------------------------------------
     
-    # Loops through and places all manga_id into one list.
-    # Removes list within list situation.
-    def manga_id_cleanup(self, manga_ids: list):
-        for manga_ids_list in manga_ids:
-            for manga_id in manga_ids_list:
-                self.cleanup_manga_id_list.append(manga_id)
-
-        return self.cleanup_manga_id_list
-
     # Handles the request module requests. 
     def get_request_function(self, manga_id: str):
         language = ["en"]
@@ -46,12 +37,12 @@ class MangaChapter:
         return chapter_list, chapter_readable_time
 
     # This should be the function that starts the class.
-    def get_manga_chapter(self):
+    def get_manga_chapter(self, manga_id_list: list):
         temporary_manga_id = "b4c93297-b32f-4f90-b619-55456a38b0aa"     # Later on, grab this from database.
 
         # Loops through the manga ids and fetches the chapters.
         # Aggregates different parts of the print info block
-        for manga_ids in self.cleanup_manga_id_list:
+        for manga_ids in manga_id_list:
             # print("IDS: ", manga_ids)
             
             manga_chapter_attributes = self.get_request_function(manga_ids)

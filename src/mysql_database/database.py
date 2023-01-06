@@ -36,7 +36,7 @@ class Database:
         VALUE = user_input
         self.cursor.execute(SQL_COMMAND, (VALUE,))
 
-        return self.cursor.fetchall()
+        return self.cursor.fetchone()
 
     def add_into_database(self, manga_title):
         self.__add_entry(manga_title)           # Protection of private member of private member function of database.
