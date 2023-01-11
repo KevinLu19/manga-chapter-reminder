@@ -13,7 +13,7 @@ class MangaChapter:
     # Public Methods
     # ----------------------------------------
     
-    # Handles the request module requests. 
+    # Handles the request module requests.
     def get_request_function(self, manga_id: str):
         language = ["en"]
 

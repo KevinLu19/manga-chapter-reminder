@@ -21,14 +21,23 @@ if __name__ == "__main__":
             break
         
         # Feeds user input into the manga title class.
-        manga_title = mangadex_api.MangaTitle(userinput)
-        list_manga_id = manga_title.get_manga_title()
+        manga_title_obj = mangadex_api.MangaTitle(userinput)
 
-        # User input stores into the database.
-        manga_database = db.Database()
-        manga_database.add_into_database(str(userinput))
+        # check_user_input = manga_title_obj.check_input_in_database()
+        
+        # # If user input is false, we add into the database.
+        # if check_user_input:
+        #     # User input stores into the database.
+        #     manga_database = db.Database()
+        #     manga_database.add_into_database(str(userinput))
+        
+        # # User input stores into the database.
+        # manga_database = db.Database()
+        # manga_database.add_into_database(str(userinput))
 
-        # print (list_manga_id)
+        list_manga_id = manga_title_obj.get_json_raw_data()
+
+        print (list_manga_id)
 
         manga_chapter = manga_chapter.MangaChapter()
         # manga_chapter.manga_id_cleanup(list_manga_id)
