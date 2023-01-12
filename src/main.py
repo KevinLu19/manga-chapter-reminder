@@ -23,21 +23,19 @@ if __name__ == "__main__":
         # Feeds user input into the manga title class.
         manga_title_obj = mangadex_api.MangaTitle(userinput)
 
-        # check_user_input = manga_title_obj.check_input_in_database()
-        
-        # # If user input is false, we add into the database.
-        # if check_user_input:
-        #     # User input stores into the database.
-        #     manga_database = db.Database()
-        #     manga_database.add_into_database(str(userinput))
-        
-        # # User input stores into the database.
-        # manga_database = db.Database()
-        # manga_database.add_into_database(str(userinput))
+        check_user_input = manga_title_obj.check_input_in_database()
+
+        # Return value from the database that is a list.
+        if not check_user_input:
+            # If cannot find manga from the database, then we add into the database.
+            print ("Not currently in the database.")
+            db_obj = db.Database()
+            db_obj.add_into_database(str(userinput))
+            print(f"{userinput} recently added into the database.")
 
         list_manga_id = manga_title_obj.get_json_raw_data()
 
-        print (list_manga_id)
+        # print (list_manga_id)
 
         manga_chapter = manga_chapter.MangaChapter()
         # manga_chapter.manga_id_cleanup(list_manga_id)

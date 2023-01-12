@@ -37,10 +37,10 @@ class MangaTitle:
     def get_json_raw_data(self):
         manga_title_of_tuple = self._mysql_database.fetch_specified_manga_title(self.__user_input)            
 
-        # If canont find manga from the database, then add into the database.
-        if not manga_title_of_tuple:
-            print ("Not currently in the database.")
-            self.add_user_input_database()
+        # # If canont find manga from the database, then add into the database.
+        # if not manga_title_of_tuple:
+        #     print ("Not currently in the database.")
+        #     self.add_user_input_database()
 
         for manga_title in manga_title_of_tuple:
             req = requests.get(f"{self.BASE_URL}/manga/", params={"title": manga_title})    # Finds the ID of manga title
@@ -58,11 +58,13 @@ class MangaTitle:
     def check_input_in_database(self):
         check_user_input = self._mysql_database.fetch_specified_manga_title(self.__user_input)
 
-        # Checking the return value from the database.
-        if not check_user_input:
-            return False
+        # # Checking the return value from the database.
+        # if not check_user_input:
+        #     print ("False")
+        #     return False
         
-        return True
+        return check_user_input
+        
 
     # ----------------------------------------
     # Private Methods
