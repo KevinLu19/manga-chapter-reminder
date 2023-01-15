@@ -1,6 +1,7 @@
 import requests
 import mysql_database.database as db
 
+
 class MangaTitle:
     BASE_URL = "https://api.mangadex.org"
 
@@ -37,13 +38,8 @@ class MangaTitle:
     def get_json_raw_data(self):
         manga_title_of_tuple = self._mysql_database.fetch_specified_manga_title(self.__user_input)            
 
-        # # If canont find manga from the database, then add into the database.
-        # if not manga_title_of_tuple:
-        #     print ("Not currently in the database.")
-        #     self.add_user_input_database()
-
         for manga_title in manga_title_of_tuple:
-            req = requests.get(f"{self.BASE_URL}/manga/", params={"title": manga_title})    # Finds the ID of manga title
+            req = requests.get(f"{self.BASE_URL}/manga", params={"title": manga_title})    # Finds the ID of manga title
             raw_request_data = req.json()["data"]
             self.manga_name_comparison(raw_request_data)
         
