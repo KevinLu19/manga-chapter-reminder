@@ -30,7 +30,7 @@ class MangaTitle:
                 # print (request_data_manga_name)
                 # print ("Manga ID: ", holding_manga_id)
                 self.manga_title_id_list.append(holding_manga_id)
-                print ("Inside the fixed list ", self.manga_title_id_list)
+                # print ("Inside the fixed list ", self.manga_title_id_list)
 
         return self.manga_title_id_list
 

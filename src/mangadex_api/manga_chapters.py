@@ -8,7 +8,7 @@ class MangaChapter:
         self.cleanup_manga_id_list = []
         self.latest_chapter_int = ""
         self.latest_chapter_readable_at = ""   # Format is yyyy-mm-dd hh:mm::ss
-        
+
     # ----------------------------------------
     # Public Methods
     # ----------------------------------------
@@ -102,9 +102,7 @@ class MangaChapter:
         print ("Current Readable Time: ", readable_time)
         print ("#############")
 
-    # Use this to helper function to retreive the next largest chapter if there is one.
-    def save_current_largest_chapter(self):
-        pass
+    
 
 
     # ----------------------------------------

@@ -145,3 +145,5 @@ src/mangadex_api/api.py
 
 .vscode/*
 .vscode
+
+src/gui/*

@@ -1,20 +1,13 @@
-from fastapi import FastAPI
-
 import mangadex_api.manga_id as mangadex_api
 import mangadex_api.manga_chapters as manga_chapter
 import mysql_database.database as db
 import mysql_database.database as db_chapter
 
-# app = FastAPI()
-
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello world"}
-
+import gui.gui as gui
 
 if __name__ == "__main__":
     manga_chapter = manga_chapter.MangaChapter()
-
+    
     while True:
         userinput = input("Enter in manga names to be stored in database (press q to exit): ")
         
@@ -25,7 +18,7 @@ if __name__ == "__main__":
         manga_title_obj = mangadex_api.MangaTitle(userinput)
         
         check_user_input = manga_title_obj.check_input_in_database()
-        print("user input from database: ", check_user_input)
+        # print("user input from database: ", check_user_input)
 
         # Return value from the database that is a list.
         if not check_user_input:
@@ -36,5 +29,5 @@ if __name__ == "__main__":
             print(f"{userinput} recently added into the database.")
         else:
             list_manga_id = manga_title_obj.get_json_raw_data()
-            print ("Manga ID List: ", list_manga_id)
+            # print ("Manga ID List: ", list_manga_id)
             manga_chapter.get_manga_chapter(list_manga_id)
